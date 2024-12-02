@@ -1,0 +1,8 @@
+# ninja log v5
+2	3470	1676185768680735865	/data/wujingjing/SinglePointSpotter_with_CLIP/models/Spotters/ops/build/temp.linux-x86_64-3.8/data/wujingjing/SinglePointSpotter_with_CLIP/models/Spotters/ops/src/cpu/ms_deform_attn_cpu.o	da251195f7b0226c
+2	11573	1676185776772736281	/data/wujingjing/SinglePointSpotter_with_CLIP/models/Spotters/ops/build/temp.linux-x86_64-3.8/data/wujingjing/SinglePointSpotter_with_CLIP/models/Spotters/ops/src/cuda/ms_deform_attn_cuda.o	4985a0d5ba58d634
+2	20455	1676185785596736734	/data/wujingjing/SinglePointSpotter_with_CLIP/models/Spotters/ops/build/temp.linux-x86_64-3.8/data/wujingjing/SinglePointSpotter_with_CLIP/models/Spotters/ops/src/vision.o	661823c7be7ff374
+36	12862	1677487103927515927	/data/wujingjing/SinglePointSpotter_with_CLIP/models/Spotters/ops/build/temp.linux-x86_64-3.8/data/wujingjing/SinglePointSpotter_with_CLIP/models/Spotters/ops/src/cuda/ms_deform_attn_cuda.o	4985a0d5ba58d634
+21	3406	1682335840669611968	/data/wujingjing/SinglePointSpotter_with_CLIP/models/Spotters/ops/build/temp.linux-x86_64-3.8/data/wujingjing/SinglePointSpotter_with_CLIP/models/Spotters/ops/src/cpu/ms_deform_attn_cpu.o	da251195f7b0226c
+21	10347	1682335847597883562	/data/wujingjing/SinglePointSpotter_with_CLIP/models/Spotters/ops/build/temp.linux-x86_64-3.8/data/wujingjing/SinglePointSpotter_with_CLIP/models/Spotters/ops/src/cuda/ms_deform_attn_cuda.o	4985a0d5ba58d634
+21	18356	1682335855570195752	/data/wujingjing/SinglePointSpotter_with_CLIP/models/Spotters/ops/build/temp.linux-x86_64-3.8/data/wujingjing/SinglePointSpotter_with_CLIP/models/Spotters/ops/src/vision.o	661823c7be7ff374

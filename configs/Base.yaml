@@ -1,0 +1,53 @@
+max_text_length: 25
+false_label_num: 16
+vocabulary_file: data/vocabulary/eng_vocabulary.txt
+model:
+  backbone: resnet50
+  use_stride: 8
+  with_deformable_encoder: True
+  transformer_width: 512
+  transformer_layers: 12
+  transformer_heads: 8
+  embed_dim: 512
+  deformable_layer: 6
+
+trainer:
+  start_iter: 0
+  niter: 200000
+  log_freq: 50
+  save_freq: 10000
+  learning_rate: 1e-4
+  batch_size: 4
+  num_workers: 4
+  optim: sgd
+  lr_policy: poly
+
+
+data:
+  alphabet: 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~
+  ignore_case: False # TODO: Make sure?
+  vocab_size: 96
+  train:
+    input_size: 640
+    annotation_files:
+      - data/annotations/synth800k.json
+    img_rootdir:
+      - /data/wujingjing/data_copy/SynthText
+    data_proportion:
+      - 1
+    batch_size: 4
+    num_workers: 4
+    augmentation:
+      RotateProb: 1
+      RotateAngle: 10
+      ResizeMinsizes:
+        - 640
+      ResizeMaxsize: 640
+      BlurProb: 0.1
+      ColorJitterProb: 0.5
+  test:
+    annotation_files:
+      - /path/to/annotation.txt
+    data_proportion:
+      - 1
+    batch_size: 4

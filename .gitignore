@@ -1,0 +1,3 @@
+weights
+data/annotations
+*/__pycache__/*
