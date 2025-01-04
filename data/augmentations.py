@@ -24,7 +24,7 @@ class RandomResize(object):
     def __init__(self, min_size, max_size):
         self.min_sizes = min_size
         self.max_size = max_size
-        logging.info('Random resize spts min sizes is {}, max_size is {}'.format(self.min_sizes, self.max_size))
+        logging.info('Random resize min sizes is {}, max_size is {}'.format(self.min_sizes, self.max_size))
         
     def __call__(self, image):
         min_size = random.choice(self.min_sizes)
@@ -40,21 +40,54 @@ class RandomResize(object):
         if max_size is not None:
             min_original_size = float(min((w, h)))
             max_original_size = float(max((w, h)))
-            if max_original_size / min_original_size * size > max_size:# 如果按照比例算出来的长边>max_size
-                size = int(round(max_size * min_original_size / max_original_size))#则短边只会取长边取max_size时的长度
+            if max_original_size / min_original_size * size > max_size:
+                size = int(round(max_size * min_original_size / max_original_size))
 
-        if (w <= h and w == size) or (h <= w and h == size):#如果长宽中有任意一个等于求出来的短边，也就是长边不超过max_size
+        if (w <= h and w == size) or (h <= w and h == size):
             return (h, w)
 
-        if w < h: #否则，就拿计算出来的最小短边
+        if w < h:
             ow = size
             oh = int(size * h / w)
         else:
             oh = size
             ow = int(size * w / h)
-
+        oh = math.ceil(oh / 32) * 32
+        ow = math.ceil(ow / 32) * 32
         return (oh, ow)
+    
+class Resize(object):
+    def __init__(self, min_side, max_side):
+        self.min_side = math.ceil(min_side / 32) * 32
+        self.max_side = math.ceil(max_side / 32) * 32
+    
+    def __call__(self, image):
+        ori_h, ori_w = image.shape[:2]
+        if self.min_side > 0:
+            if ori_h < ori_w:
+                test_h = self.min_side
+                test_w = int(ori_w * self.min_side / ori_h)
+                test_w = math.ceil(test_w / 32) * 32
+            else:
+                test_w = self.min_side
+                test_h = int(ori_h * self.min_side / ori_w)
+                test_h = math.ceil(test_h / 32) * 32
+        elif self.max_side > 0:
+            if ori_h < ori_w:
+                test_w = self.max_side
+                test_h = int(ori_h * self.max_side / ori_w)
+                test_h = math.ceil(test_h / 32) * 32
+            else:
+                test_h = self.max_side
+                test_w = int(ori_w * self.max_side / ori_h)
+                test_w = math.ceil(test_w / 32) * 32                
+        else:
+            raise ValueError("min_side or max_side must be positive")
 
+        img_resized = cv2.resize(image, (test_w, test_h))
+        return img_resized
+
+        
 class RandomRotate(object):
     def __init__(self, prob, max_theta=10):
         self.prob = prob
@@ -152,6 +185,7 @@ class PSSAugmentation(object):
             ])
         else:
             self.augment = Compose([
+                Resize(cfg.data.test.input_min_side, cfg.data.test.input_max_side),
                 ToPIL(), 
                 ToNP(), 
                 transforms.ToTensor(),

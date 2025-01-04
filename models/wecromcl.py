@@ -594,7 +594,6 @@ class WeCromCL(nn.Module):
         self.cfgs = cfgs
         self.context_length = cfgs.max_text_length
         self.use_stride = cfgs.model.use_stride
-        self.train_input_size = cfgs.data.train.input_size
         self.backbone = eval(backbone)(pretrained=True)
         self.repeated_bifpn = nn.ModuleList([BiFPN(cfgs, first_time=1), BiFPN(cfgs, first_time=0)])
         ndim = 256

@@ -34,8 +34,6 @@ class ImagePaths(Dataset):
         with open(annotation_file, 'r') as f:
             data = json.load(f)
         for img_name in data:
-            if len(self.img_paths) == 100:
-                break
             new_texts = []
             for text in data[img_name]:
                 new_text = label_filter(self.cfg, text)
@@ -68,7 +66,7 @@ class BaseDataset(Dataset):
         super().__init__()
         self.cfg = cfg
         self.data = None
-        self.data_propotion = None
+        self.data_proportion = None
         self._length = None
     
     def __len__(self):
@@ -89,6 +87,7 @@ class TrainDataset(BaseDataset):
         super().__init__(cfg)
         if isinstance(cfg.data.train.annotation_files, str):
             self.data = ImagePaths(cfg, cfg.data.train.img_rootdir ,cfg.data.train.annotation_files, training=True)
+            self._length = len(self.data)
         else:
             if cfg.data.train.data_proportion == None:
                 data = {}
@@ -114,7 +113,12 @@ class TrainDataset(BaseDataset):
                 self._length = length
 
 class TestDataset(BaseDataset):
-    pass
+    def __init__(self, cfg):
+        super().__init__(cfg)
+        assert isinstance(cfg.data.test.annotation_files, str), "During testing, only one annotation file is allowed."
+        self.data = ImagePaths(cfg, cfg.data.test.img_rootdir, cfg.data.test.annotation_files, training=False)
+        self._length = min(len(self.data), cfg.data.test.max_test_num)
+
 
 class TextCollate(object):
     def __init__(self, cfg, dataset):

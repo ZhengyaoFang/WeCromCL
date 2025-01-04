@@ -19,7 +19,6 @@ class Trainer(object):
         self.converter = converter
 
     def train(self):
-        logging.info('training on  ...' + self.dataset_name)
         logging.info('the init lr: %f' % (self.optimizer.param_groups[0]['lr']))
         t0 = time.time()
         for j, batch_samples in enumerate(self.dataloader):
@@ -47,10 +46,10 @@ class Trainer(object):
 
             if (j+self.cfg.trainer.start_iter) % self.cfg.trainer.log_freq == 0:
                 t1 = time.time()
-                tstr = "->  iter:%6d  losses:%4.6f  " % ((j+self.start_iter), loss)
+                tstr = "->  iter:%6d  losses:%4.6f  " % ((j+self.cfg.trainer.start_iter), loss)
                 for lname, lvalue in zip(loss_names, losses):
                     tstr += '%s:%4.6f  ' % (lname, lvalue)
-                tstr += '%4.6fs/batch' % ((t1 - t0) / self.log_freq)
+                tstr += '%4.6fs/batch' % ((t1 - t0) / self.cfg.trainer.log_freq)
                 logging.info(tstr)
                 t0 = time.time()
             

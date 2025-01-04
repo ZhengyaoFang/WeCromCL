@@ -16,27 +16,24 @@ trainer:
   niter: 200000
   log_freq: 50
   save_freq: 10000
-  learning_rate: 1e-4
-  batch_size: 4
-  num_workers: 4
+  learning_rate: 1e-3
+  batch_size: 16
+  num_workers: 16
   optim: sgd
   lr_policy: poly
-
+  save_dir: outputs/pretrain
 
 data:
   alphabet: 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~
-  ignore_case: False # TODO: Make sure?
-  vocab_size: 96
+  ignore_case: True # TODO: Make sure?
+  vocab_size: 70
   train:
-    input_size: 640
     annotation_files:
       - data/annotations/synth800k.json
     img_rootdir:
       - /data/wujingjing/data_copy/SynthText
     data_proportion:
       - 1
-    batch_size: 4
-    num_workers: 4
     augmentation:
       RotateProb: 1
       RotateAngle: 10
@@ -46,8 +43,14 @@ data:
       BlurProb: 0.1
       ColorJitterProb: 0.5
   test:
-    annotation_files:
-      - /path/to/annotation.txt
-    data_proportion:
-      - 1
-    batch_size: 4
+    input_min_side: -1
+    input_max_side: -1
+    annotation_files: /path/to/annotation.txt
+    batch_size: 1
+    max_test_num: 5000
+
+inference:
+  thresh: 0.015
+  vis: False
+  output_json_path: path/to/output.json
+  output_vis_dir: path/to/output_vis_dir

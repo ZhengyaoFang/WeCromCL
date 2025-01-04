@@ -1,3 +1,6 @@
 weights
 data/annotations
 */__pycache__/*
+inference
+ckpts
+*.jpg

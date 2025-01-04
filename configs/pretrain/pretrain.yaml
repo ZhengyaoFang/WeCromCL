@@ -1,1 +1,27 @@
 _base_: 'configs/Base.yaml'
+data:
+  train:
+    annotation_files:
+      - data/annotations/synth800k.json
+    img_rootdir:
+      - /data/wujingjing/data_copy/SynthText
+    data_proportion:
+      - 1
+  test:
+    input_min_side: 672
+    annotation_files: data/annotations/synth800k.json
+    img_rootdir: /data/wujingjing/data_copy/SynthText
+    max_test_num: 1000
+    batch_size: 1
+    
+trainer:
+  batch_size: 16
+  num_workers: 16
+  save_dir: outputs/pretrain
+
+inference:
+  thresh: 0.015
+  vis: True
+  output_json_path: inference/synth1k.json
+  output_vis_dir: inference/synth1k_vis
+  

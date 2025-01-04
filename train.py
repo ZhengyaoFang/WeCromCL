@@ -1,5 +1,5 @@
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 import time
 import math
 import torch
@@ -18,17 +18,11 @@ import torch.utils.data as data
 
 from data.dataset import TrainDataset, TextCollate
 
-def make_log_dir(args):
-    if os.path.exists(args.save_folder) == False:
-        os.mkdir(args.save_folder)
-    args.save_folder = args.save_folder + args.name + '/'
-    if os.path.exists(args.save_folder) == False:
-        os.mkdir(args.save_folder)
-    args.save_folder = args.save_folder + args.exp + '/'
-    if os.path.exists(args.save_folder) == False:
-        os.mkdir(args.save_folder)
+def make_log_dir(cfgs):
+    if os.path.exists(cfgs.trainer.save_folder) == False:
+        os.makedirs(cfgs.trainer.save_folder)
 
-    log_file_path = args.save_folder + '/' + time.strftime('%Y%m%d_%H%M%S') + '.log'
+    log_file_path = cfgs.trainer.save_folder + '/' + time.strftime('%Y%m%d_%H%M%S') + '.log'
     setup_logger(log_file_path)
     print_args(args)
 
@@ -38,9 +32,8 @@ if __name__ == "__main__":
     cfgs = OmegaConf.load(args.config)
     base_cfg = OmegaConf.load(cfgs._base_)
     cfgs = OmegaConf.merge(base_cfg, cfgs)
-    cfgs.trainer.save_folder = args.save_folder
 
-    make_log_dir(args)
+    make_log_dir(cfgs)
 
     criterion = ContrastiveLoss()
     converter = StrLabelConverter(cfgs.data.alphabet, cfgs.data.ignore_case, cfgs.max_text_length)
@@ -83,7 +76,7 @@ if __name__ == "__main__":
     cudnn.benchmark = True
     net.train()
     dataset = TrainDataset(cfgs)
-    dataloader = data.DataLoader(dataset, batch_size=cfgs.data.train.batch_size, num_workers=cfgs.data.train.num_workers, shuffle=True, collate_fn=TextCollate(cfgs, dataset), pin_memory=True)
+    dataloader = data.DataLoader(dataset, batch_size=cfgs.trainer.batch_size, num_workers=cfgs.trainer.num_workers, shuffle=True, collate_fn=TextCollate(cfgs, dataset), pin_memory=True)
     trainer = Trainer(net, optimizer, scheduler, criterion, dataloader, converter, cfgs)
     trainer.train()
 
