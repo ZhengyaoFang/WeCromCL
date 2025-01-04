@@ -6,6 +6,8 @@ The checkpoint can be download from [BaiduNetDisk](https://pan.baidu.com/s/1LdpX
 - Update the evaluation metrics.
 - Upload the training datasets.
 
+## Environment
+
 ## Stage1
 ### Datasets
 
