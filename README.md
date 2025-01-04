@@ -31,7 +31,7 @@ to start training. The outputs will be written to ```outputs/xxx```.
 #### Finetune
 First modify ```data.train.annotation_files``` and ```data.train.img_rootdir``` in ```configs/finetune/ic15.yaml``` to your actual path, then run
 ```
-python train.py --config configs/pretrain/pretrain.yaml --resume path/tp/pretrain_ckpt
+python train.py --config configs/pretrain/ic15.yaml --resume path/tp/pretrain_ckpt
 ```
 to start training. The outputs will be written to ```outputs/xxx```.
 ## Stage2
