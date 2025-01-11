@@ -2,9 +2,9 @@ _base_: 'configs/Base.yaml'
 data:
   train:
     annotation_files:
-      - data/annotations/ic15_train.json
+      - dataset/annotations/ic15_train.json
     img_rootdir:
-      - /data/wujingjing/data_copy/icdar2015/train_images
+      - dataset/icdar2015/icdar2015_train
     data_proportion:
       - 1
     augmentation:
@@ -18,11 +18,11 @@ data:
         - 832
         - 864
         - 896
-      ResizeMaxsize: 896
+      ResizeMaxsize: 1280
   test:
     input_max_side: 1696
-    annotation_files: data/annotations/ic15_train.json
-    img_rootdir: /data/wujingjing/data_copy/icdar2015/train_images
+    annotation_files: dataset/annotations/ic15_test.json
+    img_rootdir: dataset/icdar2015/icdar2015_test
     batch_size: 1
 
 trainer:
@@ -35,7 +35,7 @@ trainer:
   save_dir: outputs/ic15_finetune
 
 inference:
-  vis: False
-  output_json_path: inference/ic15_train.json
-  output_vis_dir: inference/ic15_train_vis
+  vis: True
+  output_json_path: inference/ic15_test.json
+  output_vis_dir: inference/ic15_test_vis
   

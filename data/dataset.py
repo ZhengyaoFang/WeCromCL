@@ -56,7 +56,7 @@ class ImagePaths(Dataset):
 
     def __getitem__(self, index):
         example = dict()
-        example['image_path'] = os.path.join(self.img_dir, self.img_paths[index])
+        example['image_path'] = self.img_paths[index]
         example['image'], example['image_size'] = self.preprocess_image(example['image_path'])
         example['recs'] = self.labels[index]
         return example

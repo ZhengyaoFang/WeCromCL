@@ -1,6 +1,7 @@
 weights
-data/annotations
+dataset/annotations
 */__pycache__/*
 inference
 ckpts
 *.jpg
+dataset

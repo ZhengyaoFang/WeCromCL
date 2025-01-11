@@ -2,7 +2,6 @@
 ![The frame work of WeCromCL](docs/framework.png)
 The checkpoint can be download from [BaiduNetDisk](https://pan.baidu.com/s/1LdpX8rGu_tyWfHUmE79hlg?pwd=3cq5) (password:3cq5). 
 ## To do
-- Update the inference file.
 - Update the evaluation metrics.
 - Upload the training datasets.
 
@@ -10,6 +9,7 @@ The checkpoint can be download from [BaiduNetDisk](https://pan.baidu.com/s/1LdpX
 
 ## Stage1
 ### Datasets
+
 
 ### Inference
 First modify ```data.test.img_rootdir``` and ```data.test.annotation_files``` in ```configs/finetune/ic15.yaml``` to your actual path, then run

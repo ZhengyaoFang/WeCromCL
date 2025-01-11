@@ -7,18 +7,19 @@ def converter_from_txt_to_json(txt_dir,json_file):
         with open(os.path.join(txt_dir, txt_file), 'r') as f:
             lines = f.readlines()
         
-        img_name = txt_file[:-4]
+        img_name = "img_"+(txt_file[:-4]+".jpg").split("_")[-1]
         words = []
         for line in lines:
-            word = line.strip().split()[-1]
+            word = line.strip().split(",")[-1][2:-1]
             if word != "###":
                 words.append(word)
         if len(words) != 0:
             json_data[img_name] = words
     with open(json_file, 'w') as f:
         json.dump(json_data, f)
+
 if __name__ == "__main__":
-    txt_dir = "/data/wujingjing/data_copy/icdar2015/test_gts"
-    json_file = "/data/fzy/WeCromCL/Stage1/dataset/annotations/ic15_test.json"
+    txt_dir = "/data/wujingjing/data_copy/icdar2013/test_gts"
+    json_file = "dataset/annotations/icdar2013_test.json"
     converter_from_txt_to_json(txt_dir,json_file)
     
