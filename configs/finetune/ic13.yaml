@@ -2,7 +2,7 @@ _base_: 'configs/Base.yaml'
 data:
   train:
     annotation_files:
-      - dataset/annotations/icdar2013_train.json
+      - dataset/annotations/ic13_train.json
     img_rootdir:
       - dataset/icdar2013/icdar2013_train
     data_proportion:
@@ -21,7 +21,7 @@ data:
       ResizeMaxsize: 1280
   test:
     input_max_side: 1152
-    annotation_files: dataset/annotations/icdar2013_test.json
+    annotation_files: dataset/annotations/ic13_test.json
     img_rootdir: dataset/icdar2013/icdar2013_test
     batch_size: 1
 
@@ -32,7 +32,7 @@ trainer:
   num_workers: 4
   optim: sgd
   lr_policy: poly
-  save_dir: outputs/ic15_finetune
+  save_dir: outputs/ic13_finetune
 
 inference:
   vis: True

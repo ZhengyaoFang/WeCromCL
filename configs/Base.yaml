@@ -20,6 +20,8 @@ trainer:
   batch_size: 16
   num_workers: 16
   optim: sgd
+  momentum: 0.9
+  weight_decay: 1e-5
   lr_policy: poly
   save_dir: outputs/pretrain
 

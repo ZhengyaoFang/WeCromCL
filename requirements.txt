@@ -1,0 +1,4 @@
+omegaconf
+shapely
+imgaug
+editdistance

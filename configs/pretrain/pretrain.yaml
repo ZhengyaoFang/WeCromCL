@@ -2,14 +2,14 @@ _base_: 'configs/Base.yaml'
 data:
   train:
     annotation_files:
-      - data/annotations/synth800k.json
+      - dataset/annotations/synth800k.json
     img_rootdir:
       - /data/wujingjing/data_copy/SynthText
     data_proportion:
       - 1
   test:
     input_min_side: 672
-    annotation_files: data/annotations/synth800k.json
+    annotation_files: dataset/annotations/synth800k.json
     img_rootdir: /data/wujingjing/data_copy/SynthText
     max_test_num: 1000
     batch_size: 1

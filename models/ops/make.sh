@@ -6,5 +6,5 @@
 # ------------------------------------------------------------------------------------------------
 # Modified from https://github.com/chengdazhi/Deformable-Convolution-V2-PyTorch/tree/pytorch_1.0.0
 # ------------------------------------------------------------------------------------------------
-conda activate wjj_ocr
+conda activate wecromcl
 python setup.py build install

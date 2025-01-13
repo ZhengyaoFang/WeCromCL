@@ -19,10 +19,10 @@ import torch.utils.data as data
 from data.dataset import TrainDataset, TextCollate
 
 def make_log_dir(cfgs):
-    if os.path.exists(cfgs.trainer.save_folder) == False:
-        os.makedirs(cfgs.trainer.save_folder)
+    if os.path.exists(cfgs.trainer.save_dir) == False:
+        os.makedirs(cfgs.trainer.save_dir)
 
-    log_file_path = cfgs.trainer.save_folder + '/' + time.strftime('%Y%m%d_%H%M%S') + '.log'
+    log_file_path = cfgs.trainer.save_dir + '/' + time.strftime('%Y%m%d_%H%M%S') + '.log'
     setup_logger(log_file_path)
     print_args(args)
 
@@ -46,16 +46,16 @@ if __name__ == "__main__":
 
     ## setup optimizer
     if cfgs.trainer.optim == 'sgd':
-        optimizer = optim.SGD(net.parameters(), lr=args.lr,
-                              momentum=args.momentum, weight_decay=args.weight_decay)
+        optimizer = optim.SGD(net.parameters(), lr=cfgs.trainer.learning_rate,
+                              momentum=cfgs.trainer.momentum, weight_decay=cfgs.trainer.weight_decay)
         logging.info('models will be optimed by sgd')
     elif cfgs.trainer.optim == 'adam':
-        optimizer = optim.Adam(net.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+        optimizer = optim.Adam(net.parameters(), lr=cfgs.trainer.learning_rate, weight_decay=cfgs.trainer.weight_decay)
         logging.info('models will be optimed by adam')
     elif cfgs.trainer.optim == 'adadelta':
-        optimizer = optim.Adadelta(net.parameters(), lr=args.lr)
+        optimizer = optim.Adadelta(net.parameters(), lr=cfgs.trainer.learning_rate)
     else:
-        optimizer = optim.Adam(net.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+        optimizer = optim.Adam(net.parameters(), lr=cfgs.trainer.learning_rate, weight_decay=cfgs.trainer.weight_decay)
         logging.info('models will be optimed by adam')
 
     if cfgs.trainer.lr_policy == 'poly':

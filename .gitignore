@@ -5,3 +5,5 @@ inference
 ckpts
 *.jpg
 dataset
+*.out
+outputs
