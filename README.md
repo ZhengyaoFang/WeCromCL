@@ -1,6 +1,6 @@
 # WeCromCL: Weakly Supervised Cross-Modality Contrastive Learning for Transcription-only Supervised Text Spotting
 ![The frame work of WeCromCL](docs/framework.png)
-This is the official implementation of [WeCromCL(ECCV 2024)](https://arxiv.org/pdf/2407.19507). You can now try to train or inference the model of first stage as described in our paper.
+This is the official implementation of [WeCromCL(ECCV 2024)](https://arxiv.org/pdf/2407.19507). You can now try to train or inference the model of the first stage as described in our paper.
 ## To do
 - Update the code and checkpoints in Stage2.
 - Updata the ctw dataset and related code.
