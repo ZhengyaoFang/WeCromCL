@@ -20,7 +20,7 @@ pip install -r requirements.txt
 You can download icdar2015, icdar2013 and totaltext datasets from [this link](https://pan.baidu.com/s/1Rxuo9IqGcFAar8vL0TNpYg?pwd=evmg).
 
 ### Inference
-The checkpoint can be download from [BaiduNetDisk](https://pan.baidu.com/s/1LdpX8rGu_tyWfHUmE79hlg?pwd=3cq5) (password:3cq5). Then modify ```data.test.img_rootdir``` and ```data.test.annotation_files``` in ```configs/finetune/ic15.yaml``` to your actual dataset path and run
+The checkpoint can be download from [BaiduNetDisk](https://pan.baidu.com/s/1LdpX8rGu_tyWfHUmE79hlg?pwd=3cq5) (password:3cq5) or [Google Drive](https://drive.google.com/drive/folders/1JctfmjyOLyC5DVsuP0WYm-tUluNzIck1?usp=drive_link). Then modify ```data.test.img_rootdir``` and ```data.test.annotation_files``` in ```configs/finetune/ic15.yaml``` to your actual dataset path and run
 ```
 python inference.py --config configs/finetune/ic15.yaml --resume /path/to/ckpt
 ```
